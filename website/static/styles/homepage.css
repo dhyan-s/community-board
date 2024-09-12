@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+.Board {
+    background-color: transparent;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background: linear-gradient(108.9deg, rgb(163, 217, 221) 10.4%, rgb(174, 250, 182) 56.2%, rgb(238, 243, 220) 86.1%);
+    font-family: "Roboto Condensed", sans-serif;
+    font-optical-sizing: auto;
+    color: black;
+}
+
+.add {
+    text-decoration: none;
+    border-radius: 50%;
+    font-size: 40px;
+    margin-left: 96.5%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+h1 {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 40%; 
+}
+
+.pfpic {
+    width: 5%;
+    height: 5%;
+    margin-bottom: 10px;
+}
+a {
+    margin-right: 1%;
+}
+
+.firstName {
+    display: inline-flex;
+    font-size: 36px;
+}
+
+.thread {
+    background-color: rgb(220, 220, 220);    
+    border-radius: 5%;
+}
+
+
+
+
