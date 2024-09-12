@@ -1,5 +1,7 @@
 // Function to create a new thread card dynamically
 function createCard(issueName, issueDescription, issueDeadline, issueTags) {
+    issueDeadline = new Date(issueDeadline).toDateString();
+
     // Find the template thread div
     const templateThread = document.querySelector('.thread');
 
@@ -61,15 +63,19 @@ function createCard(issueName, issueDescription, issueDeadline, issueTags) {
 
 // Function to fetch and display votes
 function fetchVotes() {
-    const url = 'http://127.0.0.1:8000/vote/all';  // Ensure this endpoint exists
+    const url = '/vote/get_all';  // Ensure this endpoint exists
     console.log('Fetching votes from:', url);  // Debugging log
 
     fetch(url)
         .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+            if (response.ok) {
+                return response.json();  // Parse JSON response
             }
-            return response.json();
+            else {
+                return response.json().then(error => {
+                    throw new Error(error.error);
+                })
+            }
         })
         .then(data => {
             if (Array.isArray(data)) {

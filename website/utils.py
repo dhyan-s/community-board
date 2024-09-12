@@ -5,6 +5,6 @@ def vote_class_to_dict(vote: Vote):
         'name': vote.name,
         'description': vote.description,
         'deadline': vote.deadline,
-        'tags': vote.tags,
+        'tags': vote.tags.split(" "),
         'completed': vote.completed,
     }

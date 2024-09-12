@@ -20,9 +20,8 @@ const Toast = Swal.mixin({
     }
 });
 
-// Event listener for form submission
-document.querySelector('.vote-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent page reload on form submission
+function submitVoteForm (event) {
+    event.preventDefault(); 
 
     // Get form values
     const issueName = document.querySelector('#issueName').value;
@@ -43,8 +42,7 @@ document.querySelector('.vote-form').addEventListener('submit', function(event) 
     // Debugging: Log form data to console
     console.log('Form data submitted:', formData);
 
-    // Send form data via POST request to backend
-    fetch('http://127.0.0.1:8000/vote/create', {
+    fetch('/vote/create', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -52,10 +50,14 @@ document.querySelector('.vote-form').addEventListener('submit', function(event) 
         body: JSON.stringify(formData) // Send form data as JSON
     })
     .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+        if (response.ok) {
+            return response.json();  // Parse JSON response
         }
-        return response.json();  // Parse JSON response
+        else {
+            return response.json().then(error => {
+                throw new Error(error.error);
+            })
+        }
     })
     .then(data => {
         // Debugging: Log success response to console
@@ -64,11 +66,9 @@ document.querySelector('.vote-form').addEventListener('submit', function(event) 
         // Show success toast notification
         Toast.fire({
             icon: "success",
-            title: `Vote Created: ${data.name}`
-        });
-
-        // Optionally, redirect to homepage after a short delay
-        setTimeout(() => { window.location.href = "http://127.0.0.1:8000/"; }, 2000);
+            title: `Vote Created: ${data['name']}`
+          });
+        // TODO: frontend - display new card
     })
     .catch((error) => {
         // Debugging: Log any errors to console
@@ -80,4 +80,6 @@ document.querySelector('.vote-form').addEventListener('submit', function(event) 
             title: "There was an issue creating the vote"
         });
     });
-});
+}
+
+document.querySelector('.vote-form').addEventListener('submit', submitVoteForm);
