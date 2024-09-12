@@ -18,14 +18,14 @@
     <!-- Profile Picture and Name Wrapper -->
     <div class="top-right">
         <a style="text-decoration: none;" href="#">
-            <img class="pfpic" src="{{url_for('static', filename='images/no_icon.png')}}" alt="Profile Picture">
+            <img class="pfpic" src="../assets/pfpic.png" alt="Profile Picture">
         </a>
         <p class="firstName">Kashyap</p>
     </div>
 
     <!-- Issue Form -->
     <div class="container mt-5">
-        <form>
+        <form class="vote-form">
             <div class="mb-3">
                 <label for="issueName" class="form-label">1. What is the name of your issue?</label>
                 <input type="text" class="form-control" id="issueName" placeholder="Issue name">
@@ -46,22 +46,11 @@
                 <input type="text" id="issueTags" class="form-control" placeholder="Add tags">
             </div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary submit">Submit</button>
         </form>
     </div>
 
     <!-- Tagify JS -->
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
-
-    <script>
-        // Initialize Tagify for the tags input
-        var input = document.querySelector('#issueTags');
-        new Tagify(input, {
-            delimiters: ",",  // Only allow commas to separate tags, not spaces
-            pattern: /^[^\s]+$/, // Disallow spaces in tags
-            // Optional additional settings
-            enforceWhitelist: false, // Allows any text as a tag (can be customized)
-            maxTags: 10, // Limit the number of tags
-        });
-    </script>
+    <script src="{{url_for('static',filename = 'create_vote.js')}}"></script>
 {% endblock %}
